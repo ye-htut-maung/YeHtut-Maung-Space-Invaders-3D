@@ -10,6 +10,7 @@ public class Alien : MonoBehaviour
     static float bulletSpawnRate = .002f;
     public float lastShot = 0;
     public static float shotCooldown = .1f;
+    private bool isDying;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,6 +26,11 @@ public class Alien : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!GameOverController.IsPlaying)
+        {
+            return;
+        }
+
         Vector3 position = transform.position;
         
         if(UnityEngine.Random.value < bulletSpawnRate && Time.time - lastShot > shotCooldown){
@@ -36,8 +42,20 @@ public class Alien : MonoBehaviour
 
     void OnCollisionEnter(Collision coll)
     {
-        fleet.GetComponent<AlienFleet>().aliens.Remove(gameObject);
+        if (!GameOverController.IsPlaying || isDying)
+        {
+            return;
+        }
+
+        Dart dart = coll.collider.GetComponentInParent<Dart>();
+        if (dart == null || !dart.TryConsume()) return;
+
+        isDying = true;
+        ImpactEffect.Spawn(transform.position, ImpactEffect.Kind.AlienDestroyed);
+        if (fleet.aliens.Remove(gameObject))
+        {
+            fleet.RefreshCounter();
+        }
         Destroy(gameObject);
-        Destroy(coll.gameObject);
     }
 }
