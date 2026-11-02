@@ -1,6 +1,38 @@
 # Space Invaders 3D — CSCI 381
 
-Open `Assets/Scenes/SampleScene.unity`, enter Play mode, and click **Start Game**. Use the **left/right arrows** to move and **Space** to shoot.
+## How to download and run
+
+**Please clone this repository with Git LFS instead of using GitHub's Download ZIP button.** Images and fonts are stored with Git Large File Storage (LFS). The ZIP download may contain text pointers instead of the actual assets, which prevents Unity from importing them correctly.
+
+### 1. Install the prerequisites
+
+- Git and [Git LFS](https://git-lfs.com/).
+- Unity Hub and **Unity Editor 6000.6.0f1**, the version used for this project.
+
+### 2. Clone the project
+
+Run these commands in a terminal after installing Git LFS:
+
+```sh
+git lfs install
+git clone https://github.com/ye-htut-maung/YeHtut-Maung-Space-Invaders-3D.git
+cd YeHtut-Maung-Space-Invaders-3D
+git lfs pull
+```
+
+Wait for the clone and LFS downloads to finish before opening Unity. If you already downloaded a ZIP, use the newly cloned folder for the following steps.
+
+### 3. Open and play in Unity
+
+1. In Unity Hub, add the cloned project from disk. Select the folder containing `Assets`, `Packages`, and `ProjectSettings`.
+2. Open the project with **Unity 6000.6.0f1**.
+3. Wait for Unity to download packages, import assets, and compile scripts. The first launch may take several minutes; the `Library` folder is generated automatically.
+4. In Unity's Project window, open **`Assets/Scenes/SampleScene.unity`**. Make sure this scene is open before pressing Play.
+5. Press **Play** in the Unity toolbar, then click **Start Game** in the Game window.
+
+Use the **left/right arrows** to move and **Space** to shoot. Click inside the Game window if it does not receive keyboard input.
+
+If Unity reports that an image or font cannot be read, close Unity, run `git lfs pull` inside the cloned project folder, and reopen the project.
 
 Original supplied images are in `SourceArt/`. Unity uses the imported copies in `Assets/Art/` and `Assets/Resources/`.
 
